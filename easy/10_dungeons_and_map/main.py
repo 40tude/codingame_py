@@ -38,21 +38,50 @@ if RedirectIOtoFile:
     import os
     from pathlib import Path
 
-    k_input = "input.txt"
+    k_input = "input_trap.txt"
     os.chdir(Path(__file__).parent)
     sys.stdin = open(k_input, "r")
 
+
+# -----------------------------------------------------------------------------
+k_Big = 2**63 - 1
 w, h = [int(i) for i in input().split()]
 start_row, start_col = [int(i) for i in input().split()]
 n = int(input())
-for i in range(n):
-    for j in range(h):
-        map_row = input()
+# maps = [[list(input().strip()) for _ in range(h)] for _ in range(n)]
+maps = [[list(input()) for _ in range(h)] for _ in range(n)]
 
-# Write an answer using print
-# To debug: print("Debug messages...", file=sys.stderr, flush=True)
+lengths = []
+for map in maps:
+    len = 0
+    row = start_row
+    col = start_col
+    while True:
+        if (len > w * h) or (row not in range(h)) or (col not in range(w)):
+            lengths.append(k_Big)
+            break
+        c = (map[row])[col]
+        len += 1
+        match c:
+            case "^":
+                row -= 1
+            case "v":
+                row += 1
+            case "<":
+                col -= 1
+            case ">":
+                col += 1
+            case "T":
+                lengths.append(len)
+                break
+            case ".":
+                lengths.append(k_Big)
+                break  # no path
+            case "#":
+                lengths.append(k_Big)
+                break  # trap
 
-print("mapIndex")
+print(lengths.index(min(lengths))) if min(lengths) != k_Big else print("TRAP")
 
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:

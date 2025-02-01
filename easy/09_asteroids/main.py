@@ -79,7 +79,8 @@ for y in range(h):
     for x in range(w):
         char = first_picture_row[x]
         if char.isalpha():
-            # setdefault permet de créer un dictionnaire vide si la clé n'existe pas
+            # Returns the value of the item with the specified key.
+            # If the key does not exist, insert the key, with the specified value, see example below
             asteroid = dict_asteroids.setdefault(char, {})
             asteroid["x1"] = x
             asteroid["y1"] = y
