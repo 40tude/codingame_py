@@ -1,0 +1,1 @@
+Read this page : <https://www.40tude.fr/docs/06_programmation/004_codingame_by_participants/codingame_by_participants.html>
