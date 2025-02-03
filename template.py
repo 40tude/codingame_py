@@ -16,8 +16,7 @@ if RedirectIOtoFile:
 # import time
 # start_time = time.perf_counter()
 # end_time = time.perf_counter()
-# execution_time_microseconds = (end_time - start_time) * 1_000_000
-# print(f"Execution time: {execution_time_microseconds:.2f} µs")
+# print(f"Execution time: {(end_time - start_time) * 1_000_000 :.2f} µs")
 
 
 # -----------------------------------------------------------------------------
