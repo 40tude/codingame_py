@@ -18,44 +18,15 @@ if RedirectIOtoFile:
 # print(f"Execution time: {(end_time - start_time) * 1_000_000 :.2f} µs")
 
 
-# ffff.ff.fff..fff...fffffff       8
-#            ..   ...      f       8
-
-# ffff.f.ffffff..ffff.f.ffffffff.  9
-
-
-# f.ffff.ffff..ff.ffffff.fff.f.ff. 10
-
-
-# -----------------------------------------------------------------------------
-# pour chaque ligne
-# Tant qu'il y a des f dans la ligne
-# retrouver le nombre de groupes de 3 lettres dont 3f, remplacer les f par des ., count+1=1
-# retrouver le nombre de groupes de 3 lettres dont 2f, remplacer les f par des ., count+1=1
-# retrouver le nombre de groupes de 3 lettres dont 1f, remplacer les f par des ., count+1=1
-# Afficher count
-
-import re
-
-# Replacements = [
-#     ("fff", "..."),
-#     ("ff.", "..."),
-#     ("f.f", "..."),
-#     (".ff", "..."),
-#     ("f..", "..."),
-#     (".f.", "..."),
-#     ("..f", "..."),
-# ]
-Replacements = ["fff", "ff.", "f.f", ".ff", "f..", ".f.", "..f"]
-
 n = int(input())
-for i in range(n):
-    line = input()
+for _ in range(n):
+    line = input().strip(".")
     count = 0
-    for pattern in Replacements:
-        t = re.subn(pattern, "...", line)
-        line = t[0]
-        count += t[1]
+    while len(line):
+        head = line[:3]  # up to 3 characters
+        line = line[len(head) :].strip(".")
+        count += 1  # there is always at least a fire thanks to the .strip(".")
+
     print(count)
 
 # -----------------------------------------------------------------------------

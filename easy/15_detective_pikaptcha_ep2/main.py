@@ -1,4 +1,5 @@
-# URL & Comment
+# https://www.codingame.com/ide/puzzle/detective-pikaptcha-ep2
+
 
 # -----------------------------------------------------------------------------
 RedirectIOtoFile = True
@@ -7,7 +8,7 @@ if RedirectIOtoFile:
     import os
     from pathlib import Path
 
-    k_input = "input.txt"
+    k_input = "input_one_based.txt"
     os.chdir(Path(__file__).parent)
     sys.stdin = open(k_input, "r")
 
@@ -21,7 +22,18 @@ if RedirectIOtoFile:
 
 
 # -----------------------------------------------------------------------------
-# Your code here...
+
+
+width, height = [int(i) for i in input().split()]
+for i in range(height):
+    line = input()
+
+side = input()
+
+for i in range(height):
+
+    print("#####")
+
 
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:
