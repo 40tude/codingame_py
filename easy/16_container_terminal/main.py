@@ -35,8 +35,9 @@ if RedirectIOtoFile:
 for i in range(int(input())):
     stack = []
     for char in input():
-        char_max = max(stack, key=lambda x: ord(x), default="@")
-        if char > char_max:
+        # char_max = max(stack, key=lambda x: ord(x), default="@")
+        # if char > char_max:
+        if char > max(stack, key=lambda x: ord(x), default="@"):
             stack += char
         else:
             for j, id2 in enumerate(stack):
