@@ -18,9 +18,40 @@ if RedirectIOtoFile:
 # # -----------------------------------------------------------------------------
 # # To debug: print("Debug messages...", file=sys.stderr, flush=True)
 # import time
+
 # start_time = time.perf_counter()
 # end_time = time.perf_counter()
 # print(f"Execution time: {(end_time - start_time) * 1_000_000 :.2f} µs")
+
+
+# -----------------------------------------------------------------------------
+# Not mine
+# A = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# w, h = map(int, input().split())
+# grid = [list(input()) for i in range(h)]
+# S = (0, 0)
+
+# for y in range(h):
+#     if 'S' in grid[y]:
+#         S = (y, grid[y].index('S'))
+#         break
+
+# Q = [S]
+# grid[S[0]][S[1]] = '0'
+
+# while Q:
+#     cell = Q.pop(0)
+
+#     for d in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+#         y, x = (cell[0] + d[0]) % h, (cell[1] + d[1]) % w
+
+#         if grid[y][x] != '.': continue
+
+#         grid[y][x] = A[A.find(grid[cell[0]][cell[1]])+1]
+#         Q.append((y, x))
+
+# for row in grid:
+#     print(''.join(row))
 
 
 # -----------------------------------------------------------------------------
@@ -86,23 +117,23 @@ def bfs(root):
 
 
 # -------------------------------------
-w, h = [int(i) for i in input().split()]
+w, h = map(int, input().split())
 
-map = []
-for j in range(h):
-    line = list(input())
-    map.append(line)
-    for i, c in enumerate(line):
-        if c == "S":
-            x0, y0 = i, j
+map = [list(input()) for i in range(h)]
+for y0 in range(h):
+    if "S" in map[y0]:
+        x0 = map[y0].index("S")
+        break
+
 
 # On crée un arbre
 # On se place en Start y0, x0
 # On probe les 4 directions
 #   Si la cellule est accessible on crée un enfant et on stocke  d = 1 + parent
 # On recommence pour chacun des enfants jusqu'à ce
-root = Node(x0, y0)
-bfs(root)
+# root = Node(x0, y0)
+# bfs(root)
+bfs(Node(x0, y0))
 
 for y in range(h):
     print("".join(map[y]))
