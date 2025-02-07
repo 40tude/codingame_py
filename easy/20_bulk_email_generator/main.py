@@ -1,5 +1,9 @@
 # https://www.codingame.com/ide/puzzle/bulk-email-generator
 
+# Not a line based problem
+# for the ith choice, pick the ith clause (modulo the number of clauses)
+
+
 # -----------------------------------------------------------------------------
 RedirectIOtoFile = True
 if RedirectIOtoFile:
@@ -7,7 +11,7 @@ if RedirectIOtoFile:
     import os
     from pathlib import Path
 
-    k_input = "input.txt"
+    k_input = "input_edge.txt"
     os.chdir(Path(__file__).parent)
     sys.stdin = open(k_input, "r")
 
@@ -20,12 +24,19 @@ if RedirectIOtoFile:
 
 
 # -----------------------------------------------------------------------------
-n = int(input())
-for i in range(n):
-    line = input()
+import re
 
-print("42")
+lines = ""
 
+for _ in range(int(input())):
+    lines += input()
+    lines += "\n"
+
+print(lines)
+
+print()
+match = re.search(r".*(\(.*\)).*", lines, re.DOTALL)
+print(match.group(1))
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:
     sys.stdin.close()
