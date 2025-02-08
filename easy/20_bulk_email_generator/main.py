@@ -24,19 +24,53 @@ if RedirectIOtoFile:
 
 
 # -----------------------------------------------------------------------------
-import re
+# Not mine
+# import re
 
-lines = ""
+# n = int(input())
+# txt = '\n'.join(input() for _ in range(n))
+# pattern = '\(((?:(?:[^(\|)]*)\|?)*)\)'
 
-for _ in range(int(input())):
-    lines += input()
-    lines += "\n"
+# for pos, match in enumerate(re.findall(pattern, txt)):
+#     choices = match.split('|')
+#     txt = txt.replace('(%s)' % match, choices[pos % len(choices)], 1)
 
-print(lines)
+# print(txt)
 
-print()
-match = re.search(r".*(\(.*\)).*", lines, re.DOTALL)
-print(match.group(1))
+
+# -----------------------------------------------------------------------------
+# def make_choice(str_in):
+#     choices = str_in.split("|")
+#     return choices[curr_choice % len(choices)]
+
+# make_choice = lambda str_in: str_in.split("|")[curr_choice % len(str_in.split("|"))]
+make_choice = lambda str_in: (choices := str_in.split("|"))[curr_choice % len(choices)]
+
+str_in = str_out = ""
+curr_choice = cursor = 0
+
+# for _ in range(int(input())):
+#     str_in += input()
+#     str_in += "\n"
+str_in = "\n".join(input() for _ in range(int(input())))
+
+while cursor < len(str_in):
+    c = str_in[cursor]
+    if c == "(":
+        sub = ""
+        cursor += 1
+        while str_in[cursor] != ")":
+            sub += str_in[cursor]
+            cursor += 1
+        str_out += make_choice(sub)
+        curr_choice += 1
+    else:
+        str_out += c
+    cursor += 1
+
+print(str_out)
+
+
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:
     sys.stdin.close()
