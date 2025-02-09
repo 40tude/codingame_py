@@ -63,6 +63,8 @@ total_weight = 0
 ]
 
 
+# Voir aussi : result = list(map(process, zip(*[iter(data)] * 3)))
+
 print(f"{total_weight:.3f}")
 
 

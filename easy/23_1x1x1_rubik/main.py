@@ -20,9 +20,6 @@ if RedirectIOtoFile:
 # print(f"Execution time: {(end_time - start_time) * 1_000_000 :.2f} µs")
 
 
-for c in "xyz":
-    rotate[c + "'"] = {v: k for k, v in rotate[c].items()}
-
 # -----------------------------------------------------------------------------
 # LUT
 #    L  R  U  D  F  B
@@ -41,6 +38,9 @@ LUT = {
     "z": {"L": "U", "R": "D", "U": "R", "D": "L", "F": "F", "B": "B"},
     "z'": {"L": "D", "R": "U", "U": "L", "D": "R", "F": "F", "B": "B"},
 }
+
+# for c in "xyz":
+#     LUT[c + "'"] = {v: k for k, v in LUT[c].items()}
 
 rotations = input().split()
 face1 = input()
