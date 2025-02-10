@@ -1,7 +1,9 @@
-# https://www.codingame.com/ide/puzzle/rubik
+# https://www.codingame.com/training/medium/game-of-life
 
-# Le nombre de mini-cubes visibles sur un Rubik's Cube® de taille NxNxN.
-
+# 1 => 0 if voisin = 0 ou 1
+# 1 => 1 if voisin = 2 ou 3
+# 1 => 0 if voisin > 3
+# 0 => 1 if voisin== 3
 
 # -----------------------------------------------------------------------------
 RedirectIOtoFile = True
@@ -25,11 +27,13 @@ if RedirectIOtoFile:
 
 
 # -----------------------------------------------------------------------------
-# Your code here...
-n = int(input())
-# a = 1 if n == 1 else n**3 - (n - 2) ** 3
-# print(a)
-print(1) if n == 1 else print(n**3 - (n - 2) ** 3)
+w, h = map(int, input().split())
+map = [list(input()) for _ in range(h)]
+
+
+for row in map:
+    print(*row, sep="")
+
 
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:

@@ -1,6 +1,6 @@
-# https://www.codingame.com/ide/puzzle/rubik
+# https://www.codingame.com/ide/puzzle/sum-of-divisors
 
-# Le nombre de mini-cubes visibles sur un Rubik's Cube® de taille NxNxN.
+# the sum of divisors of all the numbers from 1 to n.
 
 
 # -----------------------------------------------------------------------------
@@ -25,11 +25,11 @@ if RedirectIOtoFile:
 
 
 # -----------------------------------------------------------------------------
-# Your code here...
 n = int(input())
-# a = 1 if n == 1 else n**3 - (n - 2) ** 3
-# print(a)
-print(1) if n == 1 else print(n**3 - (n - 2) ** 3)
+s = 0
+[s := s + n // i * i for i in range(n, 0, -1)]
+print(s)
+
 
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:
