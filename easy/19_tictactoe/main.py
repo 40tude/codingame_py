@@ -45,10 +45,16 @@ if RedirectIOtoFile:
 def transpose(M):
 
     # return [[M[j][i] for j in range(3)] for i in range(3)]
+
     # I want to modify the original matrix in-place
-    for i in range(3):
-        for j in range(i + 1, 3):
-            M[i][j], M[j][i] = M[j][i], M[i][j]
+    # Works fine because it is a 3x3 matrix.
+    # Will not work if the matrix is not square
+
+    # for i in range(3):
+    #     for j in range(i + 1, 3):
+    #         M[i][j], M[j][i] = M[j][i], M[i][j]
+
+    M = zip(*M)
 
 
 # --------------------------------------

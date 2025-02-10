@@ -1,4 +1,7 @@
-# URL & Comment
+# https://www.codingame.com/ide/puzzle/rubik
+
+# Le nombre de mini-cubes visibles sur un Rubik's Cube® de taille NxNxN.
+
 
 # -----------------------------------------------------------------------------
 RedirectIOtoFile = True
