@@ -119,11 +119,14 @@ def bfs(root):
 # -------------------------------------
 w, h = map(int, input().split())
 
-map = [list(input()) for i in range(h)]
-for y0 in range(h):
-    if "S" in map[y0]:
-        x0 = map[y0].index("S")
-        break
+map = [list(input()) for _ in range(h)]
+# for y0 in range(h):
+#     if "S" in map[y0]:
+#         x0 = map[y0].index("S")
+#         break
+
+# next() renvoie le premier couple (y, x) trouvé où la valeur est "S".
+y0, x0 = next((y, x) for y, row in enumerate(map) for x, value in enumerate(row) if value == "S")
 
 
 # On crée un arbre
@@ -135,9 +138,9 @@ for y0 in range(h):
 # bfs(root)
 bfs(Node(x0, y0))
 
-for y in range(h):
-    print("".join(map[y]))
-
+# for y in range(h):
+#     print("".join(map[y]))
+print("\n".join("".join(row) for row in map))
 
 # # -----------------------------------------------------------------------------
 # from collections import deque

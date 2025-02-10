@@ -95,9 +95,9 @@ while True:
     if x == x0 and y == y0:
         break
 
-for y in range(h):
-    print("".join(map[y]))
-
+# for y in range(h):
+#     print("".join(map[y]))
+print("\n".join("".join(row) for row in map))
 
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:

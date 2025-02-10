@@ -39,8 +39,11 @@ if RedirectIOtoFile:
 # -----------------------------------------------------------------------------
 bricks_per_row = int(input())
 nb_brick = int(input())
+
 # brick_weights = [int(i) for i in input().split()]
 # brick_weights.sort(reverse=True)
+# brick_weights = [int(i) for i in input().split()].sort(reverse=True) # ! attention sort ne retourne rien
+
 brick_weights = sorted([int(i) for i in input().split()], reverse=True)
 
 # def process(trio, L):

@@ -45,8 +45,12 @@ if RedirectIOtoFile:
 
 # -----------------------------------------------------------------------------
 k_Big = 2**63 - 1
-w, h = [int(i) for i in input().split()]
-start_row, start_col = [int(i) for i in input().split()]
+# w, h = [int(i) for i in input().split()]
+w, h = map(int, input().split())
+
+# start_row, start_col = [int(i) for i in input().split()]
+start_row, start_col = map(int, input().split())
+
 n = int(input())
 # maps = [[list(input().strip()) for _ in range(h)] for _ in range(n)]
 maps = [[list(input()) for _ in range(h)] for _ in range(n)]

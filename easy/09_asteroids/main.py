@@ -19,7 +19,7 @@ if RedirectIOtoFile:
     import os
     from pathlib import Path
 
-    k_input = "input_out_of_bounds.txt"  # "input.txt"
+    k_input = "input.txt"  # "input.txt"
     os.chdir(Path(__file__).parent)
     sys.stdin = open(k_input, "r")
 
@@ -65,10 +65,12 @@ if RedirectIOtoFile:
 # image1.append(list(first_picture_row))
 # image2.append(list(second_picture_row))
 
+
 # -----------------------------------------------------------------------------
 import math
 
-w, h, t1, t2, t3 = [int(i) for i in input().split()]
+# w, h, t1, t2, t3 = [int(i) for i in input().split()]
+w, h, t1, t2, t3 = map(int, input().split())
 
 # dict_asteroids: dict[int, int, int, int, int, int] = {}
 dict_asteroids = {}
@@ -79,8 +81,7 @@ for y in range(h):
     for x in range(w):
         char = first_picture_row[x]
         if char.isalpha():
-            # Returns the value of the item with the specified key.
-            # If the key does not exist, insert the key, with the specified value, see example below
+            # setdefault permet de créer un dictionnaire vide si la clé n'existe pas
             asteroid = dict_asteroids.setdefault(char, {})
             asteroid["x1"] = x
             asteroid["y1"] = y
@@ -90,7 +91,6 @@ for y in range(h):
             asteroid = dict_asteroids.setdefault(char, {})
             asteroid["x2"] = x
             asteroid["y2"] = y
-
 
 for asteroid in dict_asteroids:
     vx = (dict_asteroids[asteroid]["x2"] - dict_asteroids[asteroid]["x1"]) / (t2 - t1)
@@ -108,8 +108,57 @@ for asteroid in dict_asteroids:
         else:
             img_out[y3][x3] = asteroid if ord(asteroid) < ord(img_out[y3][x3]) else img_out[y3][x3]
 
-for row in img_out:
-    print("".join(row))
+# for row in img_out:
+#     print("".join(row))
+print("\n".join("".join(row) for row in img_out))
+
+# -----------------------------------------------------------------------------
+# import math
+
+# # w, h, t1, t2, t3 = [int(i) for i in input().split()]
+# w, h, t1, t2, t3 = map(int, input().split())
+
+# # dict_asteroids: dict[int, int, int, int, int, int] = {}
+# dict_asteroids = {}
+
+# for y in range(h):
+#     first_picture_row, second_picture_row = input().split()
+
+#     for x in range(w):
+#         char = first_picture_row[x]
+#         if char.isalpha():
+#             # Returns the value of the item with the specified key.
+#             # If the key does not exist, insert the key, with the specified value, see example below
+#             asteroid = dict_asteroids.setdefault(char, {})
+#             asteroid["x1"] = x
+#             asteroid["y1"] = y
+
+#         char = second_picture_row[x]
+#         if char.isalpha():
+#             asteroid = dict_asteroids.setdefault(char, {})
+#             asteroid["x2"] = x
+#             asteroid["y2"] = y
+
+
+# for asteroid in dict_asteroids:
+#     vx = (dict_asteroids[asteroid]["x2"] - dict_asteroids[asteroid]["x1"]) / (t2 - t1)
+#     vy = (dict_asteroids[asteroid]["y2"] - dict_asteroids[asteroid]["y1"]) / (t2 - t1)
+#     dict_asteroids[asteroid]["x3"] = dict_asteroids[asteroid]["x2"] + math.floor((vx * (t3 - t2)))
+#     dict_asteroids[asteroid]["y3"] = dict_asteroids[asteroid]["y2"] + math.floor(vy * (t3 - t2))
+
+# # img_out = [["." for _ in range(w)] for _ in range(h)]
+# img_out = [list("-" * w) for _ in range(h)]
+
+# for asteroid in dict_asteroids:
+#     x3, y3 = dict_asteroids[asteroid]["x3"], dict_asteroids[asteroid]["y3"]
+#     if x3 in range(w) and y3 in range(h):
+#         if img_out[y3][x3] == ".":
+#             img_out[y3][x3] = asteroid
+#         else:
+#             img_out[y3][x3] = asteroid if ord(asteroid) < ord(img_out[y3][x3]) else img_out[y3][x3]
+
+# for row in img_out:
+#     print("".join(row))
 
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:

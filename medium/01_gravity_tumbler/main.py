@@ -1,5 +1,6 @@
 # https://www.codingame.com/ide/puzzle/gravity-tumbler
 
+# rotating counterclockwise 90°
 
 # -----------------------------------------------------------------------------
 RedirectIOtoFile = True
@@ -22,6 +23,15 @@ if RedirectIOtoFile:
 
 
 # -----------------------------------------------------------------------------
+
+
+width, height = int(input())
+count = int(input())
+map_in = [list(input()) for _ in range(n)]
+
+
+print("\n".join("".join(row) for row in map_out))
+
 
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:

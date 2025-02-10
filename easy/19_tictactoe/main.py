@@ -97,8 +97,9 @@ if not modified:
 if not modified:
     print("false")
 else:
-    for y in range(3):
-        print("".join(map[y]))
+    # for y in range(3):
+    #     print("".join(map[y]))
+    print("\n".join("".join(row) for row in map))
 
 
 # -----------------------------------------------------------------------------
