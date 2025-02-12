@@ -24,28 +24,28 @@ if RedirectIOtoFile:
 
 # -----------------------------------------------------------------------------
 # Not mine
-input()
-levels = sum(2 ** int(x) for x in input().split())
-print("{:b}".format(levels).count("1"))
+# input()
+# levels = sum(2 ** int(x) for x in input().split())
+# print("{:b}".format(levels).count("1"))
 
 # -----------------------------------------------------------------------------
-# input()  # number of stones is not needed
-# stones = list(map(int, input().split()))
+input()  # number of stones is not needed
+stones = list(map(int, input().split()))
 
-# b_mod = True
-# while b_mod:
-#     stones.sort()
-#     b_mod = False
-#     i = 0
-#     while i < len(stones) - 1:
-#         if stones[i] == stones[i + 1]:
-#             stones[i] += 1
-#             stones.pop(i + 1)
-#             b_mod = True
-#         else:
-#             i += 1
+b_mod = True
+while b_mod:
+    stones.sort()
+    b_mod = False
+    i = 0
+    while i < len(stones) - 1:
+        if stones[i] == stones[i + 1]:
+            stones[i] += 1
+            stones.pop(i + 1)
+            b_mod = True
+        else:
+            i += 1
 
-# print(len(set(stones)))
+print(len(set(stones)))
 
 
 # # -----------------------------------------------------------------------------
