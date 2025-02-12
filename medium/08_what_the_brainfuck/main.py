@@ -1,4 +1,5 @@
 # https://www.codingame.com/ide/puzzle/what-the-brainfuck
+# https://fr.wikipedia.org/wiki/Brainfuck
 
 # > increment the pointer position.
 # < decrement the pointer position.
@@ -53,7 +54,6 @@ if RedirectIOtoFile:
 import sys
 
 
-# -------------------------------------
 def preprocessor():
     line_out = ""
     for line in prog_lines:
@@ -63,30 +63,29 @@ def preprocessor():
     return line_out
 
 
-# -------------------------------------
 def parser(line):
     stack = []
     for op_code in line:
         if op_code == "[":
             stack.append(op_code)
         elif op_code == "]":
-            if not stack:
-                return
+            if not stack:  # no matching [
+                print("SYNTAX ERROR")
+                sys.exit()
             stack.pop()
     if stack:
         print("SYNTAX ERROR")
         sys.exit()
 
 
-# -------------------------------------
 def ptr_check(addr):
     if addr < 0 or addr > ram_size - 1:
         print("POINTER OUT OF BOUNDS")
         sys.exit()
 
 
-def val_check(addr):
-    if addr < 0 or addr > 255:
+def val_check(val):
+    if val < 0 or val > 255:
         print("INCORRECT VALUE")
         sys.exit()
 
@@ -104,33 +103,27 @@ def val_dec(addr, ip):
     return addr, (ip := ip + 1)
 
 
-# -------------------------------------
 def addr_inc(addr, ip):
-    # addr += 1
     ptr_check(addr := addr + 1)
     return addr, (ip := ip + 1)
 
 
 def addr_dec(addr, ip):
-    # addr -= 1
     ptr_check(addr := addr - 1)
     return addr, (ip := ip + 1)
 
 
-# -------------------------------------
 def STO(addr, ip):
     ram[addr] = params.pop(0)
     val_check(ram[addr])
     return addr, (ip := ip + 1)
 
 
-# -------------------------------------
-def output(addr, ip):
+def PRINT(addr, ip):
     print(chr(ram[addr]), end="")
     return addr, (ip := ip + 1)
 
 
-# -------------------------------------
 def jump_fwd(addr, ip):
     stack.append(ip)
     if ram[addr] == 0:
@@ -138,38 +131,31 @@ def jump_fwd(addr, ip):
     return addr, (ip := ip + 1)
 
 
-# -------------------------------------
 def jump_bck(addr, ip):
-    if ram[addr] != 0:
-        ip = stack[-1]
+    if ram[addr] == 0:
+        stack.pop()  # remove
+    else:
+        ip = stack[-1]  # just read
     return addr, (ip := ip + 1)
 
 
-# > increment the pointer position.
-# < decrement the pointer position.
-# + increment the value of the cell the pointer is pointing to.
-# - decrement the value of the cell the pointer is pointing to.
-# . output the value of the pointed cell, interpreting it as an ASCII value.
-# , accept a positive one byte integer as input and store it in the pointed cell.
-# [ jump to the instruction after the corresponding ] if the pointed cell's value is 0. Can be NESTED
-# ] go back to the instruction after the corresponding [ if the pointed cell's value is different from 0.
+# -------------------------------------
 ops = {
     ">": addr_inc,
     "<": addr_dec,
     "+": val_inc,
     "-": val_dec,
-    ".": output,
+    ".": PRINT,
     ",": STO,
     "[": jump_fwd,
     "]": jump_bck,
 }
 
-# -------------------------------------
 line_count, ram_size, n_inputs = map(int, input().split())
 prog_lines = [input() for _ in range(line_count)]
 params = [int(input()) for _ in range(n_inputs)]
 
-line = preprocessor()  # Remove comments... Flatten the source code on a single line
+line = preprocessor()  # Remove comments... Flatten the code in one line
 parser(line)  # Check for syntax errors
 
 ip = 0  # Instruction Pointer
@@ -178,11 +164,7 @@ ram = [0] * ram_size
 stack: list[int] = []
 
 while ip < len(line):
-    op_code = line[ip]
-    if op_code in ops:
-        addr, ip = ops[op_code](addr, ip)
-    else:
-        ip += 1
+    addr, ip = ops[line[ip]](addr, ip)
 
 # -----------------------------------------------------------------------------
 if RedirectIOtoFile:
