@@ -1,0 +1,24 @@
+......-...-..---.-----.-..-..-..
+5
+HELL
+HELLO
+OWORLD
+WORLD
+TEST
+
+Solution : 2
+
+
+
+
+-.-
+6
+A
+B
+C
+HELLO
+K
+WORLD
+
+
+
