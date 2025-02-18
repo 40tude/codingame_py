@@ -32,7 +32,7 @@ if RedirectIOtoFile:
     import os
     from pathlib import Path
 
-    k_input = "input_05.txt"
+    k_input = "input_07.txt"
     os.chdir(Path(__file__).parent)
     sys.stdin = open(k_input, "r")
 

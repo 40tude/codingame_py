@@ -1,0 +1,12 @@
+-.-
+6
+A
+B
+C
+HELLO
+K
+WORLD
+Solution : 1
+
+
+

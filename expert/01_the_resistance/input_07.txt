@@ -1,0 +1,14 @@
+...
+2
+E
+EEE
+Solution : 19
+
+...----
+4
+E
+EE
+T
+TT
+Solution : 25
+

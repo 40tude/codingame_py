@@ -5,5 +5,4 @@ KIM
 TEXT
 TREM
 CEM
-
-Solution 125
+Solution : 125
