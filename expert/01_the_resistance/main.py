@@ -32,9 +32,23 @@ if RedirectIOtoFile:
     import os
     from pathlib import Path
 
-    k_input = "input_07.txt"
+    k_input = "input_05.txt"
     os.chdir(Path(__file__).parent)
     sys.stdin = open(k_input, "r")
+
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 DICO_MORSE = {
@@ -67,20 +81,21 @@ DICO_MORSE = {
 }
 
 
-# --------------------------------------
-# Approche recursive
-# On a une chaîne, on choisit un mot qui commence comme la chaîne
-# Si on a trouvé un mot, on supprime de la chaîne les lettres du mot et on rappelle
-#       Quand la chaîne a une longueur nulle on compte +1
-#       Sinon on recommence et on passe en revue tous les mots du vocabulaire
-def check_if_in(voc, morse_str):
+# ! “cache” provides memoization.
+# As a default argument, it is shared between calls and therefore behaves like a static variable.
+def build_messages(voc, morse_str, cache={}):
     if morse_str == "":
         return 1
+
+    if morse_str in cache:
+        return cache[morse_str]
 
     count = 0
     for translated in voc.values():
         if morse_str.startswith(translated):
-            count += check_if_in(voc, morse_str[len(translated) :])
+            count += build_messages(voc, morse_str[len(translated) :], cache)
+
+    cache[morse_str] = count
     return count
 
 
@@ -90,8 +105,97 @@ voc_size = int(input())
 vocabulary = {
     word: "".join(DICO_MORSE[letter] for letter in word) for word in (input().strip() for _ in range(voc_size))
 }
-result = check_if_in(vocabulary, morse_input)
-print(result)
+# memo: dict[str, int] = {}
+# print(build_messages(vocabulary, morse_input, memo))
+print(build_messages(vocabulary, morse_input))
+
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
+
+# DICO_MORSE = {
+#     "A": ".-",
+#     "B": "-...",
+#     "C": "-.-.",
+#     "D": "-..",
+#     "E": ".",
+#     "F": "..-.",
+#     "G": "--.",
+#     "H": "....",
+#     "I": "..",
+#     "J": ".---",
+#     "K": "-.-",
+#     "L": ".-..",
+#     "M": "--",
+#     "N": "-.",
+#     "O": "---",
+#     "P": ".--.",
+#     "Q": "--.-",
+#     "R": ".-.",
+#     "S": "...",
+#     "T": "-",
+#     "U": "..-",
+#     "V": "...-",
+#     "W": ".--",
+#     "X": "-..-",
+#     "Y": "-.--",
+#     "Z": "--..",
+# }
+
+
+# # --------------------------------------
+# # Recursive approach
+# # We have a string, we choose a word that starts like the string
+# # If we found a word, we remove the letters of the word from the string and call again
+# #       When the string has a length of zero, we count +1 (meaning we have a set of valid words)
+# #       Otherwise, we start over and go through all the words in the vocabulary
+# def check_if_in1(voc, morse_str):
+#     if morse_str == "":
+#         return 1
+
+#     count = 0
+#     # for translated in voc.values():
+#     for word, translated in voc.items():
+#         if morse_str.startswith(translated):
+#             print(f"Look for {word}\t ({translated})\tat beginning of {morse_str}")
+#             count += check_if_in1(voc, morse_str[len(translated) :])
+#             print(count)
+#     return count
+
+
+# # # Recursive, starts with the end of the string
+# # def check_if_in2(voc, morse_str):
+# #     if morse_str == "":
+# #         return 1
+
+# #     count = 0
+# #     # for translated in voc.values():
+# #     for word, translated in voc.items():
+# #         if morse_str.endswith(translated):
+# #             print(f"Look for {word}\t ({translated})\tat end of {morse_str}")
+# #             count += check_if_in2(voc, morse_str[: -len(translated)])
+# #     return count
+
+
+# # --------------------------------------
+# morse_input = input()
+# voc_size = int(input())
+# vocabulary = {
+#     word: "".join(DICO_MORSE[letter] for letter in word) for word in (input().strip() for _ in range(voc_size))
+# }
+# result = check_if_in1(vocabulary, morse_input)
+# print(result)
 
 
 # -----------------------------------------------------------------------------

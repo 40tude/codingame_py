@@ -1,0 +1,52 @@
+.........
+2
+E
+EEE
+Solution : 19
+
+-....--.-.-....--.-.
+3
+BAC
+BANN
+DUC
+Solution : 9
+
+....----
+4
+E
+EE
+T
+TT
+Solution : 25
+
+......-...-..---.-----.-..-..-..
+4
+HE
+LLO
+WORLD
+HELLO
+Solution : 2 
+(HE-LLO-WORLD et HELLO-WORLD)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
