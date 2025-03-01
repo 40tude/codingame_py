@@ -1,0 +1,20 @@
+4
+2
+Solution : 3
+
+
+
+55
+2
+Solution : 12
+
+
+
+
+60
+3
+Solution : 1398
+
+170
+0
+Solution : 0
