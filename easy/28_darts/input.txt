@@ -1,6 +1,6 @@
-4
-2
-Solution : 3
+60
+3
+Solution : 1398
 
 
 
@@ -9,12 +9,41 @@ Solution : 3
 Solution : 12
 
 
+60
+3
+Solution : 1398
+
+
+
+
+
+
 
 
 60
 3
 Solution : 1398
 
+
 170
 0
 Solution : 0
+
+
+4
+2
+Solution : 3
+
+
+
+
+
+
+
+
+
+
+60
+3
+Solution : 1398
+
