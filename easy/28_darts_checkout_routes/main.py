@@ -84,12 +84,11 @@ segments = {
 }
 
 targets = [int(input())]  # Target score to reach
-nb_darts = int(input())  # Number of darts available
+darts = nb_darts = int(input())  # Number of darts available
 
 start_time = time.perf_counter()
 
 nb_routes = 0
-darts = nb_darts
 while darts > 0:
     new_targets = []
     valid_segments = ["D"] if darts == nb_darts else segments.keys()  # Last dart must be a double

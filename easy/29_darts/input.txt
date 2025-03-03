@@ -1,0 +1,53 @@
+20
+5
+Eric
+Joe
+Molly
+Louis
+Brandon
+10
+Joe 0 0
+Molly 0 0
+Brandon 0 0
+Eric -50 50
+Louis 50 -50
+Joe 10 10
+Molly -10 10
+Brandon -10 -10
+Eric 5 5
+Louis 0 0
+
+Solution :
+Joe 20
+Molly 20
+Brandon 20
+Eric 15
+Louis 15
+
+
+
+20
+1
+Will
+3
+Will -10 10
+Will -5 7
+Will 0 0
+
+Solution :
+Will 30
+
+
+20
+2
+Will
+Jill
+4
+Will 0 0
+Jill 0 0
+Will 20 20
+Jill 0 0
+
+Solution :
+Jill 30
+Will 15
