@@ -111,6 +111,54 @@ if RedirectIOtoFile:
 
 
 # -----------------------------------------------------------------------------
+import time
+import sys
+
+n = int(input())
+
+start_time = time.perf_counter()
+
+board = [[0] * n for _ in range(n)]
+
+x = y = 0
+dx = dy = 1
+
+nb_moves = n
+current_val = 1
+
+while current_val <= n * n:
+
+    # x moving
+    for _ in range(nb_moves):
+        board[y][x] = current_val
+        current_val += 1
+        x = x + dx
+    dx = -dx
+    x += dx
+    y += dy
+
+    nb_moves -= 1
+
+    # y moving
+    for _ in range(nb_moves):
+        board[y][x] = current_val
+        current_val += 1
+        y = y + dy
+    dy = -dy
+    y += dy
+    x += dx
+
+end_time = time.perf_counter()
+# Milky Way Execution time: 301_722.10 µs
+print(f"Execution time: {(end_time - start_time) * 1_000_000 :_.2f} µs", file=sys.stderr, flush=True)
+
+total = sum(board[i][i] + board[i][n - i - 1] for i in range(n))
+if n % 2 == 1:
+    total -= board[n // 2][n // 2]  # Remove center value counted twice
+print(total)
+
+
+# # -----------------------------------------------------------------------------
 # import time
 # import sys
 
@@ -149,63 +197,117 @@ if RedirectIOtoFile:
 #     x += dx
 
 # end_time = time.perf_counter()
-# # Milky Way Execution time: 373_874.60 µs
+# # Milky Way Execution time: 301_722.10 µs
 # print(f"Execution time: {(end_time - start_time) * 1_000_000 :_.2f} µs", file=sys.stderr, flush=True)
 
-# # total = 0
-# # for i in range(n):
-# #     total += board[i][i] + board[i][n - i - 1]
-# # print(total if n % 2 == 0 else total - n**2)
+# total = sum(board[i][i] + board[i][n - i - 1] for i in range(n))
+# if n % 2 == 1:
+#     total -= board[n // 2][n // 2]  # Remove center value counted twice
+# print(total)
+
+
+# # -----------------------------------------------------------------------------
+
+# import time
+# import sys
+
+# n = int(input())
+
+# start_time = time.perf_counter()
+
+# board = [[0] * n for _ in range(n)]
+
+# x = y = 0
+# dx, dy = 1, 1  # Movement directions
+
+# nb_moves = n
+# current_val = 1
+
+# while current_val <= n * n:
+
+#     # x moving (horizontal)
+#     for _ in range(nb_moves):
+#         board[y][x] = current_val
+#         current_val += 1
+#         if _ < nb_moves - 1:  # Do not move after last placement
+#             x += dx
+
+#     dx = -dx  # Change direction
+#     y += dy  # Move downward
+
+#     nb_moves -= 1
+
+#     if current_val > n * n:
+#         break  # Stop early if we have filled the board
+
+#     # y moving (vertical)
+#     for _ in range(nb_moves):
+#         board[y][x] = current_val
+#         current_val += 1
+#         if _ < nb_moves - 1:  # Do not move after last placement
+#             y += dy
+
+#     dy = -dy  # Change direction
+#     x += dx  # Move sideways
+
+# end_time = time.perf_counter()
+
+# # Milky Way Execution time: 402_348.10 µs
+# print(f"Execution time: {(end_time - start_time) * 1_000_000 :_.2f} µs", file=sys.stderr, flush=True)
+
+# # Compute sum of both diagonals
 # total = sum(board[i][i] + board[i][n - i - 1] for i in range(n))
 # if n % 2 == 1:
 #     total -= board[n // 2][n // 2]  # Remove center value counted twice
 
+# print(total)
 
-# -----------------------------------------------------------------------------
 
-import time
-import sys
+# # -----------------------------------------------------------------------------
 
-n = int(input())
+# import time
+# import sys
 
-start_time = time.perf_counter()
+# n = int(input())
 
-# Create an empty NxN board
-board = [[0] * n for _ in range(n)]
+# start_time = time.perf_counter()
 
-# Directions in order: Right, Down, Left, Up
-directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # (dx, dy)
-dir_index = 0  # Start moving right
+# # Create an empty NxN board
+# board = [[0] * n for _ in range(n)]
 
-x, y = 0, 0  # Start at top-left corner
-current_val = 1
+# # Directions in order: Right, Down, Left, Up
+# directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # (dx, dy)
+# dir_index = 0  # Start moving right
 
-while current_val <= n * n:
-    board[x][y] = current_val  # Fill the current cell
-    current_val += 1
+# x, y = 0, 0  # Start at top-left corner
+# current_val = 1
 
-    # Compute the next position
-    nx, ny = x + directions[dir_index][0], y + directions[dir_index][1]
+# while current_val <= n * n:
+#     board[x][y] = current_val  # Fill the current cell
+#     current_val += 1
 
-    # If out of bounds or cell already filled, change direction
-    if not (0 <= nx < n and 0 <= ny < n and board[nx][ny] == 0):
-        dir_index = (dir_index + 1) % 4  # Change direction
-        nx, ny = x + directions[dir_index][0], y + directions[dir_index][1]  # Recalculate next position
+#     # Compute the next position
+#     nx, ny = x + directions[dir_index][0], y + directions[dir_index][1]
 
-    # Move to the next position
-    x, y = nx, ny
+#     # If out of bounds or cell already filled, change direction
+#     if not (0 <= nx < n and 0 <= ny < n and board[nx][ny] == 0):
+#         dir_index = (dir_index + 1) % 4  # Change direction
+#         nx, ny = x + directions[dir_index][0], y + directions[dir_index][1]  # Recalculate next position
 
-end_time = time.perf_counter()
+#     # Move to the next position
+#     x, y = nx, ny
 
-# Print execution time
-print(f"Execution time: {(end_time - start_time) * 1_000_000 :_.2f} µs", file=sys.stderr, flush=True)
+# end_time = time.perf_counter()
 
-# Compute sum of both diagonals
-total = sum(board[i][i] + board[i][n - i - 1] for i in range(n))
-if n % 2 == 1:
-    total -= board[n // 2][n // 2]  # Remove center value counted twice
+# # Milky Way Execution time: 836_304.00 µs
+# print(f"Execution time: {(end_time - start_time) * 1_000_000 :_.2f} µs", file=sys.stderr, flush=True)
 
-print(total)
+# # Compute sum of both diagonals
+# total = sum(board[i][i] + board[i][n - i - 1] for i in range(n))
+# if n % 2 == 1:
+#     total -= board[n // 2][n // 2]  # Remove center value counted twice
+
+# print(total)
 
 
 # -----------------------------------------------------------------------------
